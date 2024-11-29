@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@faker-js/faker": "^9.2.0",
     "@wdio/appium-service": "^9.4.1",
     "@wdio/cli": "^9.4.1",
     "@wdio/dot-reporter": "^9.2.14",

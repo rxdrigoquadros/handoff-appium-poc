@@ -6,7 +6,6 @@ describe('Login Flow', () => {
     it('should log in using phone number', async () => {
         logger.info('Starting the login flow...');
 
-
         await loginPage.clickLoginButton();
         logger.info('Clicked "Log in" button');
 
@@ -16,7 +15,7 @@ describe('Login Flow', () => {
 
 
         await loginPage.enterPhoneNumber(process.env.LOGIN_PHONE);
-        logger.info('Typed "Phone" login');
+        logger.info('Entered "Phone" login');
 
 
         await loginPage.clickContinueButton();
