@@ -23,24 +23,20 @@ This repository contains a **Proof of Concept (PoC)** for automating tests of th
 
 ```plaintext
 handoff-poc/
-├── src/
-│   ├── configs/
-│   │   ├── capabilities.js      # Appium capabilities configuration
-│   │   ├── environment.js       # Environment variables and URLs
-│   │   └── appium-server.js     # Appium server configuration
-│   └── utils/
-│       └── helpers.js           # Reusable utility functions
+├── reports/
+│   ├── logs/                    # Generated logs
+│   ├── mochawesome-report/      # Generated reports
+│   └── screenshots/             # Saved screenshots
 ├── tests/
 │   ├── specs/
 │   │   ├── login.spec.js        # Login flow test cases
 │   │   └── ...                  # Other test cases
-│   ├── data/
-│   │   └── test-data.json       # Static test data
-│   └── pages/
-│       ├── login.page.js        # Login Page Object
-│       └── ...                  # Other Page Objects
-├── reports/
-│   └── mochawesome-report/      # Generated reports
+│   ├── pages/
+│   │   ├── login.page.js        # Login Page Object
+│   │   └── ...                  # Other Page Objects
+│   └── utils/
+│       ├── helpers.js           # Reusable utility functions
+│       └── login.page.js        # Login Page Object
 ├── .env                         # Environment configurations
 ├── package.json                 # Project dependencies and scripts
 └── README.md                    # Documentation
