@@ -1,65 +1,72 @@
-
-const { waitForElementVisible } = require('../utils/helpers'); // Importa helper para esperar o elemento
+const { waitForElementVisible } = require('../utils/helpers');
 
 class LoginPage {
-    // Elementos da tela de login
     get loginButton() {
-        return $('//android.widget.Button[@text="Log in"]'); // Localizador do botão "Log in"
+        return $('android=new UiSelector().text("Log in")');
     }
 
     get phoneOptionButton() {
-        return $('//android.widget.Button[@text="Phone"]'); // Localizador do botão "Phone"
+        return $('android=new UiSelector().text("Phone")');
     }
 
     get phoneInput() {
-        return $('//android.widget.EditText[@content-desc="phone-input"]'); // Localizador do campo de telefone
+        return $('android=new UiSelector().className("android.widget.EditText")');
     }
 
     get continueButton() {
-        return $('//android.widget.Button[@text="Continue"]'); // Localizador do botão "Continue"
+        return $('android=new UiSelector().text("Continue")');
     }
 
     get smsInput() {
-        return $('//android.widget.EditText[@content-desc="sms-code-input"]'); // Localizador do campo de código SMS
+        return $('android=new UiSelector().className("android.widget.EditText")');
+    }
+
+    get verifyButton() {
+        return $('android=new UiSelector().text("Verify")');
     }
 
     get successMessage() {
-        return $('//android.widget.TextView[@text="Estimates"]'); // Localizador da mensagem de sucesso (ajustar conforme necessário)
+        return $('android=new UiSelector().text("Estimates")');
     }
 
-    // Método para clicar no botão "Log in"
+    
     async clickLoginButton() {
         await waitForElementVisible(this.loginButton);
         await this.loginButton.click();
     }
 
-    // Método para selecionar "Phone" como método de login
+    
     async selectPhoneOption() {
         await waitForElementVisible(this.phoneOptionButton);
         await this.phoneOptionButton.click();
     }
 
-    // Método para inserir o número de telefone
+    
     async enterPhoneNumber(phoneNumber) {
         const phoneInputElement = await this.phoneInput;
         await waitForElementVisible(phoneInputElement);
-        await phoneInputElement.setValue(phoneNumber); // Passa o telefone para o campo
+        await phoneInputElement.setValue(phoneNumber);
     }
 
-    // Método para clicar no botão "Continue"
+    
     async clickContinueButton() {
         await waitForElementVisible(this.continueButton);
         await this.continueButton.click();
     }
 
-    // Método para inserir o código SMS
+    
     async enterSmsCode(smsCode) {
         const smsInputElement = await this.smsInput;
         await waitForElementVisible(smsInputElement);
-        await smsInputElement.setValue(smsCode); // Passa o código SMS para o campo
+        await smsInputElement.setValue(smsCode);
     }
 
-    // Método para verificar se o login foi bem-sucedido (mensagem de boas-vindas)
+    async clickVerifyButton() {
+        await waitForElementVisible(this.verifyButton);
+        await this.verifyButton.click();
+    }
+
+    
     async verifyLoginSuccess() {
         const successMessageElement = await this.successMessage;
         await waitForElementVisible(successMessageElement);

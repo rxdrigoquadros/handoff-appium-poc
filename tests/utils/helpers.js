@@ -101,23 +101,6 @@ async function findElementById(id) {
     }
 }
 
-/**
- * Function to tap on X,Y coordinates.
- * @param {int} x - The X coordinate to tap.
- * @param {int} y - The Y coordinate to tap.
- */
-async function tapByCoordinates(x, y) {
-    try {
-        await driver.touchAction([
-            { action: 'tap', x, y } // Ação de toque nas coordenadas fornecidas
-        ]);
-        logger.info(`Tapped on coordinates X: ${x}, Y: ${y}`);
-    } catch (error) {
-        logger.error(`Error tapping at coordinates X: ${x}, Y: ${y}`, error);
-        throw error;
-    }
-}
-
 module.exports = {
     waitForElementVisible,
     captureScreenshot,
@@ -127,5 +110,4 @@ module.exports = {
     retryAction,
     clickButtonByText,
     findElementById,
-    tapByCoordinates,
 };
