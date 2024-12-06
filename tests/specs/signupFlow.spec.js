@@ -5,7 +5,7 @@ const expect = require('expect.js');
 const { faker } = require('@faker-js/faker');
 
 describe('Happy path for new user', () => {
-    it.only('Should sign up using correct data', async () => {
+    it('Should sign up using correct data', async () => {
         logger.info('Starting the login flow...');
 
         let firstName = faker.name.firstName();
