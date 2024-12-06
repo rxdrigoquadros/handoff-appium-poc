@@ -1,10 +1,11 @@
 const loginPage = require('../pages/loginPage');
+const smsVerificationPage = require('../pages/smsVerificationPage')
+const estimatesPage = require('../pages/estimatesPage');
 const logger = require('../utils/logger');
 const expect = require('expect.js');
-const estimatesPage = require('../pages/estimatesPage');
 
 describe('Happy path for existent user', () => {
-    it('should log in using phone number', async () => {
+    it('Should be log in using phone number', async () => {
         logger.info('Starting the login flow...');
 
         await loginPage.clickLoginButton();
@@ -22,20 +23,18 @@ describe('Happy path for existent user', () => {
         await loginPage.clickContinueButton();
         logger.info('Clicked "Continue" button');
 
-
-        await smsverificationPage.enterSmsCode(process.env.SMS_VALIDATION);
+        await smsVerificationPage.enterSmsCode(process.env.SMS_VALIDATION);
         logger.info('Entered SMS code');
-
 
         await smsVerificationPage.clickVerifyButton();
         logger.info('Clicked "Verify" button');
 
-
-        const isLoginSuccessful = await estimatesPage.verifyLoginSuccess();
-        logger.info('Login successful, estimate screen displayed');
-
+        const isLoginSuccessful = await estimatesPage.verifySuccess();
+        logger.info('Sign up successful, estimate screen displayed');
 
         expect(isLoginSuccessful).to.be.true;
-        logger.info('Login test completed successfully');
+        logger.info('Sign up test completed successfully');
     });
+
+    it('Should be create a new estimate')
 });

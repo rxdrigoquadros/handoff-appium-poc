@@ -1,5 +1,6 @@
 const signupPage = require('../pages/signupPage');
 const smsVerificationPage = require('../pages/smsVerificationPage')
+const estimatesPage = require('../pages/estimatesPage');
 const logger = require('../utils/logger');
 const expect = require('expect.js');
 const { faker } = require('@faker-js/faker');
@@ -39,16 +40,16 @@ describe('Happy path for new user', () => {
         await signupPage.clickGetStartedFreeButton();
         logger.info('Clicked "Get started free" button');
 
-        await smsverificationPage.enterSmsCode(process.env.SMS_VALIDATION);
+        await smsVerificationPage.enterSmsCode(process.env.SMS_VALIDATION);
         logger.info('Entered SMS code');
 
         await smsVerificationPage.clickVerifyButton();
         logger.info('Clicked "Verify" button');
 
-        const isSignUpSuccessful = await estimatesPage.verifyLoginSuccess();
+        const isSignUpSuccessful = await estimatesPage.verifySuccess();
         logger.info('Login successful, estimate screen displayed');
 
         expect(isSignUpSuccessful).to.be.true;
         logger.info('Login test completed successfully');
-    })
-})
+    });
+});
