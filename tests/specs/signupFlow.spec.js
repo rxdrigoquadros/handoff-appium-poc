@@ -1,9 +1,10 @@
 const signupPage = require('../pages/signupPage');
+const smsVerificationPage = require('../pages/smsVerificationPage')
 const logger = require('../utils/logger');
 const expect = require('expect.js');
 const { faker } = require('@faker-js/faker');
 
-describe('Sign up Flow', () => {
+describe('Happy path for new user', () => {
     it.only('Should sign up using correct data', async () => {
         logger.info('Starting the login flow...');
 
@@ -13,6 +14,7 @@ describe('Sign up Flow', () => {
         console.log(lastName)
         let fullName = `${firstName} ${lastName}`;
         console.log(fullName)
+
         await signupPage.enterFullName(fullName)
         logger.info('Entered a random full name')
 
@@ -36,5 +38,17 @@ describe('Sign up Flow', () => {
 
         await signupPage.clickGetStartedFreeButton();
         logger.info('Clicked "Get started free" button');
+
+        await smsverificationPage.enterSmsCode(process.env.SMS_VALIDATION);
+        logger.info('Entered SMS code');
+
+        await smsVerificationPage.clickVerifyButton();
+        logger.info('Clicked "Verify" button');
+
+        const isSignUpSuccessful = await estimatesPage.verifyLoginSuccess();
+        logger.info('Login successful, estimate screen displayed');
+
+        expect(isSignUpSuccessful).to.be.true;
+        logger.info('Login test completed successfully');
     })
 })

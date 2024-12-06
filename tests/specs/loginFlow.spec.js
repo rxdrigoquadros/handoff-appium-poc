@@ -1,8 +1,9 @@
 const loginPage = require('../pages/loginPage');
 const logger = require('../utils/logger');
 const expect = require('expect.js');
+const estimatesPage = require('../pages/estimatesPage');
 
-describe('Login Flow', () => {
+describe('Happy path for existent user', () => {
     it('should log in using phone number', async () => {
         logger.info('Starting the login flow...');
 
@@ -22,15 +23,15 @@ describe('Login Flow', () => {
         logger.info('Clicked "Continue" button');
 
 
-        await loginPage.enterSmsCode(process.env.SMS_VALIDATION);
+        await smsverificationPage.enterSmsCode(process.env.SMS_VALIDATION);
         logger.info('Entered SMS code');
 
 
-        await loginPage.clickVerifyButton();
+        await smsVerificationPage.clickVerifyButton();
         logger.info('Clicked "Verify" button');
 
 
-        const isLoginSuccessful = await loginPage.verifyLoginSuccess();
+        const isLoginSuccessful = await estimatesPage.verifyLoginSuccess();
         logger.info('Login successful, estimate screen displayed');
 
 
