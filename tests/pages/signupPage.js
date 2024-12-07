@@ -1,6 +1,10 @@
 const { waitForElementVisible } = require('../utils/helpers');
 
 class SignupPage {
+    get loginButton() {
+        return $('android=new UiSelector().text("Log in")');
+    }
+
     get fullNameInput() {
         return $('android=new UiSelector().text("Full Name *")');
     }
@@ -19,6 +23,11 @@ class SignupPage {
 
     get getStartedFreeButton() {
         return $('android=new UiSelector().text("Get Started Free")');
+    }
+
+    async clickLoginButton() {
+        await waitForElementVisible(this.loginButton);
+        await this.loginButton.click();
     }
 
     async enterFullName(randomFullName) {

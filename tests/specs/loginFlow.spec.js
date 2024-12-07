@@ -1,4 +1,4 @@
-const loginPage = require('../pages/loginPage');
+const signupPage = require('../pages/signupPage');
 const smsVerificationPage = require('../pages/smsVerificationPage')
 const estimatesPage = require('../pages/estimatesPage');
 const logger = require('../utils/logger');
@@ -8,7 +8,7 @@ describe('Happy path for existent user', () => {
     it('Should be log in using phone number', async () => {
         logger.info('Starting the login flow...');
 
-        await loginPage.clickLoginButton();
+        await signupPage.clickLoginButton();
         logger.info('Clicked "Log in" button');
 
 
