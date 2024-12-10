@@ -41,6 +41,10 @@ class EstimatesPage {
         return $('android=')
     }
 
+    get threeDotMenuButton() {
+        return $('android=new UiSelector().text("󰇙").instance(0)')
+    }
+
     async clicknewEstimateButton() {
         await waitForElementVisible(this.newEstimateButton);
         await this.newEstimateButton.click();

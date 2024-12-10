@@ -1,14 +1,16 @@
-const signupPage = require('../pages/signupPage');
+const loginPage = require('../pages/loginPage');
 const smsVerificationPage = require('../pages/smsVerificationPage')
 const estimatesPage = require('../pages/estimatesPage');
+const chatPage = require('../pages/chatPage')
 const logger = require('../utils/logger');
 const expect = require('expect.js');
+const chatPage = require('../pages/chatPage');
 
 describe('Happy path for existent user', () => {
     it('Should be log in using phone number', async () => {
         logger.info('Starting the login flow...');
 
-        await signupPage.clickLoginButton();
+        await loginPage.clickLoginButton();
         logger.info('Clicked "Log in" button');
 
 
@@ -36,5 +38,29 @@ describe('Happy path for existent user', () => {
         logger.info('Sign up test completed successfully');
     });
 
-    it('Should be create a new estimate')
+    it('Should be create a new estimate using template', async () => {
+        logger.info('Starting the estimate creation flow...');
+
+        await estimatesPage.clicknewEstimateButton();
+        logger.info('Clicked "+New" button');
+
+        await chatPage.clickFirstTemplateButton();
+        logger.info('Clicked "Bathroom Remodel" button');
+
+        await chatPage.clickSendButton();
+        logger.info('Clicked "Send" button');
+
+        await chatPage.clickReviewEstimateButton();
+        logger.info('Clicked "Review estimate" button');
+
+        await chatPage.clickCreateProposalButton();
+        logger.info('Clicked "Create proposal" button');
+    })
+
+    it('Should be update a existent estimate with AI', async () => {
+        logger.info('Starting the estimate creation flow...');
+
+        await estimatesPage.clicknewEstimateButton();
+        logger.info('Clicked "Continue" button');
+    })
 });

@@ -52,4 +52,18 @@ describe('Happy path for new user', () => {
         expect(isSignUpSuccessful).to.be.true;
         logger.info('Login test completed successfully');
     });
+
+    it('Should be create a new estimate using custom prompt', async () => {
+        logger.info('Starting the estimate creation flow...');
+
+        await estimatesPage.clicknewEstimateButton();
+        logger.info('Clicked "Continue" button');
+    })
+
+    it('Should be update a existent estimate manually', async () => {
+        logger.info('Starting the estimate creation flow...');
+
+        await estimatesPage.clicknewEstimateButton();
+        logger.info('Clicked "Continue" button');
+    })
 });
