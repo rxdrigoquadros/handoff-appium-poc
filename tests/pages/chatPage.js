@@ -1,6 +1,10 @@
 const { waitForElementVisible } = require('../utils/helpers');
 
 class ChatPage {
+    get chatInput() {
+        return $('android=new UiSelector().description("Type or talk to start estimating")')
+    }
+
     get firstTemplateButton() {
         return $('android=new UiSelector().className("android.view.ViewGroup").instance(41)')
     }
@@ -33,6 +37,12 @@ class ChatPage {
         return $('android=new UiSelector().text("Preview & Send")')
     }
 
+    async enterChatInput(prompt) {
+        const chatInputElement = await this.chatInput;
+        await waitForElementVisible(chatInputElement);
+        await chatInputElement.setValue(prompt);
+    }
+
     async clickfirstTemplateButton() {
         await waitForElementVisible(this.firstTemplateButton);
         await this.firstTemplateButton.click();
@@ -51,6 +61,27 @@ class ChatPage {
     async clickCreateProposalButton() {
         await waitForElementVisible(this.createProposalButton);
         await this.createProposalButton();
+    }
+
+    async clickAddClientButton() {
+        await waitForElementVisible(this.addClientButton);
+        await this.addClientButton();
+    }
+
+    async enterClientName(clientName) {
+        const filterClientElement = await this.filterClientInput;
+        await waitForElementVisible(filterClientElement);
+        await filterClientElement.setValue(clientName);
+    }
+
+    async clickFilterClientButton() {
+        await waitForElementVisible(this.filterClientButton);
+        await this.filterClientButton();
+    }
+
+    async clickReviewSendButton() {
+        await waitForElementVisible(this.reviewSendButton);
+        await this.reviewSendButton();
     }
 }
 

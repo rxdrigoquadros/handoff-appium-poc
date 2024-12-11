@@ -13,14 +13,11 @@ describe('Happy path for existent user', () => {
         await loginPage.clickLoginButton();
         logger.info('Clicked "Log in" button');
 
-
         await loginPage.selectPhoneOption();
         logger.info('Chosen "Phone" login option');
 
-
         await loginPage.enterPhoneNumber(process.env.LOGIN_PHONE);
         logger.info('Entered "Phone" login');
-
 
         await loginPage.clickContinueButton();
         logger.info('Clicked "Continue" button');
@@ -39,7 +36,7 @@ describe('Happy path for existent user', () => {
     });
 
     it('Should be create a new estimate using template', async () => {
-        logger.info('Starting the estimate creation flow...');
+        logger.info('Starting the estimate creation flow using a template');
 
         await estimatesPage.clicknewEstimateButton();
         logger.info('Clicked "+New" button');
@@ -55,6 +52,15 @@ describe('Happy path for existent user', () => {
 
         await chatPage.clickCreateProposalButton();
         logger.info('Clicked "Create proposal" button');
+
+        await chatPage.clickAddClientButton();
+        logger.info('Clicked "Add client" button');
+
+        await chatPage.clickFilterClientButton("Pablo");
+        logger.info('Entered SMS code');
+
+        await chatPage.clickReviewSendButton();
+        logger.info('Clicked "Review & Send" button');
     })
 
     it('Should be update a existent estimate with AI', async () => {

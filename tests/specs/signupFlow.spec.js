@@ -1,6 +1,7 @@
 const signupPage = require('../pages/signupPage');
 const smsVerificationPage = require('../pages/smsVerificationPage')
 const estimatesPage = require('../pages/estimatesPage');
+const chatPage = require('../pages/chatPage')
 const logger = require('../utils/logger');
 const expect = require('expect.js');
 const { faker } = require('@faker-js/faker');
@@ -54,10 +55,28 @@ describe('Happy path for new user', () => {
     });
 
     it('Should be create a new estimate using custom prompt', async () => {
-        logger.info('Starting the estimate creation flow...');
+        logger.info('Starting the estimate creation flow using custom prompt');
 
-        await estimatesPage.clicknewEstimateButton();
-        logger.info('Clicked "Continue" button');
+        await chatPage.enterChatInput('This kitchen remodel is 15 inches x 10 inches with 9 inches ceilings. Scope includes: complete demo, drywall, 12x12 tile floor, base and upper cabinets, quartz countertops, 12 inches mosaic backsplash, new sink, outlets, recessed lights, appliances, baseboard, and painting. No layout changes. Use mid grade finishes.');
+        logger.info('Enter custom prompt in the chat input');
+
+        await chatPage.clickSendButton();
+        logger.info('Clicked "Send" button');
+
+        await chatPage.clickReviewEstimateButton();
+        logger.info('Clicked "Review estimate" button');
+
+        await chatPage.clickCreateProposalButton();
+        logger.info('Clicked "Create proposal" button');
+
+        await chatPage.clickAddClientButton();
+        logger.info('Clicked "Add client" button');
+
+        await chatPage.clickFilterClientButton("Pablo");
+        logger.info('Entered SMS code');
+
+        await chatPage.clickReviewSendButton();
+        logger.info('Clicked "Review & Send" button');
     })
 
     it('Should be update a existent estimate manually', async () => {
