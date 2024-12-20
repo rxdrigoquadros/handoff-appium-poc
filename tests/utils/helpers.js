@@ -36,6 +36,10 @@ async function scrollToElement(element) {
     await driver.execute('mobile: scroll', { element: element.elementId });
 }
 
+async function pressEnter() {
+    await driver.execute('mobile: performEditorAction', {'action': 'Done'});
+}
+
 /**
  * Logs a custom message for debugging purposes.
  * @param {string} message - The message to log.

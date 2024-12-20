@@ -11,15 +11,10 @@ exports.config = {
         }]
     ],
 
-    
-    //hostname: 'localhost',
-    //port: 4723,
-    //path: '/wd/hub',
-
     capabilities: [{
         platformName: 'Android',
         'appium:platformVersion': '12.0',
-        'appium:deviceName': 'RQ8M909W7BF',
+        'appium:deviceName': 'RQ8M909W7BF', //pixel_6_pro
         'appium:appPackage': 'com.onebuild.handoff',
         'appium:appActivity': 'com.onebuild.handoff.MainActivity',
         'appium:automationName': 'UiAutomator2',

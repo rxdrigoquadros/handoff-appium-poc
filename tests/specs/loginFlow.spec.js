@@ -1,7 +1,8 @@
 const loginPage = require('../pages/loginPage');
 const smsVerificationPage = require('../pages/smsVerificationPage')
 const estimatesPage = require('../pages/estimatesPage');
-const chatPage = require('../pages/chatPage')
+const chatPage = require('../pages/chatPage');
+const helpers = require('../utils/helpers')
 const logger = require('../utils/logger');
 const expect = require('expect.js');
 const chatPage = require('../pages/chatPage');
@@ -38,7 +39,7 @@ describe('Happy path for existent user', () => {
     it('Should be create a new estimate using template', async () => {
         logger.info('Starting the estimate creation flow using a template');
 
-        await estimatesPage.clicknewEstimateButton();
+        await estimatesPage.clickNewEstimateButton();
         logger.info('Clicked "+New" button');
 
         await chatPage.clickFirstTemplateButton();
@@ -64,9 +65,25 @@ describe('Happy path for existent user', () => {
     })
 
     it('Should be update a existent estimate with AI', async () => {
-        logger.info('Starting the estimate creation flow...');
+        logger.info('Starting the update estimate flow...');
 
-        await estimatesPage.clicknewEstimateButton();
-        logger.info('Clicked "Continue" button');
+        await estimatesPage.clickFirstExistentEstimateCard();
+        logger.info('Clicked in the first estimate existent card');
+
+        await estimatesPage.clickFirstAddItemExistentEstimate();
+        logger.info('Clicked in the frist add button');
+
+        await estimatesPage.enterUpdateEstimateAddItemTitle('Testing');
+        logger.info('Add item named "Testing"');
+
+        await estimatesPage.updateEstimateAddQuantityItem(3);
+        logger.info('Add quantity "3" for "Testing" item');
+
+        await estimatesPage.enterUpdateEstimateAddValue(100);
+        logger.info('Add value "100" for "Testing" item');
+
+        await helpers.pressEnter();
+
+        
     })
 });

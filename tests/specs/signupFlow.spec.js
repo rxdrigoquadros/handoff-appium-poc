@@ -7,12 +7,12 @@ const expect = require('expect.js');
 const { faker } = require('@faker-js/faker');
 
 describe('Happy path for new user', () => {
-    it('Should sign up using correct data', async () => {
+    it.only('Should sign up using correct data', async () => {
         logger.info('Starting the login flow...');
 
-        let firstName = faker.name.firstName();
+        let firstName = faker.person.firstName();
         console.log(firstName);
-        let lastName = faker.name.lastName();
+        let lastName = faker.person.lastName();
         console.log(lastName)
         let fullName = `${firstName} ${lastName}`;
         console.log(fullName)
@@ -82,7 +82,7 @@ describe('Happy path for new user', () => {
     it('Should be update a existent estimate manually', async () => {
         logger.info('Starting the estimate creation flow...');
 
-        await estimatesPage.clicknewEstimateButton();
+        await estimatesPage.clickNewEstimateButton();
         logger.info('Clicked "Continue" button');
     })
 });

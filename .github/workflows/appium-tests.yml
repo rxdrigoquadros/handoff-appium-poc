@@ -1,0 +1,71 @@
+name: Run Appium Tests with External APK
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  android-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout do repositório
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2. Configurar Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    # 3. Configurar Android SDK com emulador próximo ao Samsung Galaxy S24
+    - name: Set up Android Emulator
+      uses: reactivecircus/android-emulator-runner@v3
+      with:
+        api-level: 34                # Nível de API (Android 14)
+        target: google_apis          # Imagem do sistema com Google APIs
+        arch: x86_64                 # Arquitetura
+        profile: pixel_6_pro         # Perfil próximo de um Samsung moderno
+        disable-animations: true     # Otimização de desempenho
+        custom-hardware-profile: |
+          hw.ramSize=8192
+          hw.lcd.width=1440
+          hw.lcd.height=3200
+          hw.lcd.density=500
+          hw.cpu.arch=x86_64
+          hw.cpu.ncore=4
+          hw.gpu.enabled=yes
+          disk.dataPartition.size=8G
+
+    # 4. Instalar dependências do projeto
+    - name: Install dependencies
+      run: npm install
+
+    # 5. Baixar o APK do AWS S3
+    - name: Download APK from S3
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        mkdir -p test-assets
+        aws s3 cp s3://your-bucket-name/your-app.apk ./test-assets/your-app.apk
+
+    # 6. Instalar o APK no Emulador
+    - name: Install APK on Emulator
+      run: adb install ./test-assets/your-app.apk
+
+    # 7. Iniciar o servidor Appium
+    - name: Start Appium server
+      run: |
+        npm install -g appium
+        appium --base-path /wd/hub --allow-cors &
+      env:
+        NODE_OPTIONS: --max-old-space-size=4096
+
+    # 8. Executar os testes com o APK baixado
+    - name: Run Appium tests
+      run: npm test
+      env:
+        APK_PATH: ${{ github.workspace }}/test-assets/your-app.apk
